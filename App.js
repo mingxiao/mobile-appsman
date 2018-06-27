@@ -19,7 +19,6 @@ class OrgsPage extends React.Component {
           authorization: `bearer ${accessToken}`
         }
       };
-      console.log({options});
       const response = await fetch("http://api.sys.oakley.cf-app.com/v2/organizations?page=1&results-per-page=50&order-by=name&order-direction=asc", options);
       const {resources} = await response.json();
       this.setState({orgs: resources});
@@ -64,7 +63,6 @@ class SpacesPage extends React.Component {
           authorization: `bearer ${accessToken}`
         }
       };
-      console.log({options});
       const response = await fetch(`http://api.sys.oakley.cf-app.com/v2/spaces?q=organization_guid%3A${orgGuid}&page=1&results-per-page=50&order-by=name&order-direction=asc`, options);
       const {resources} = await response.json();
       this.setState({spaces: resources});
@@ -75,7 +73,7 @@ class SpacesPage extends React.Component {
 
   render() {
     const {spaces = []} = this.state;
-    const content = spaces.map(org => {
+    const content = spaces.map(space => {
       return <View style={styles.content} key={space.metadata.guid}>
         <Button title={space.entity.name}/>
       </View>
